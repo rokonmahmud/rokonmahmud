@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Andrew Grant - README</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --card:#111820;
+    --border:#2a323d;
+    --text:#c9d1d9;
+    --muted:#8b949e;
+    --orange:#e3a24a;
+    --cyan:#58c4dc;
+    --green:#3fb950;
+    --purple:#bc8cff;
+    --yellow:#e3c04a;
+    --red:#ff5f56;
+    --amber:#ffbd2e;
+    --dot-green:#27c93f;
+    --link:#58a6ff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding:24px;
+  }
+  .wrap{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:18px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .titlebar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    background:#0b1015;
+    border-bottom:1px solid var(--border);
+  }
+  .dot{width:12px;height:12px;border-radius:50%;}
+  .dot.red{background:var(--red);}
+  .dot.amber{background:var(--amber);}
+  .dot.green{background:var(--dot-green);}
+  .filebar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 16px;
+    border-bottom:1px solid var(--border);
+    color:var(--muted);
+    font-size:13px;
+  }
+  .filebar .fname{color:var(--muted);}
+  .filebar .fname .chev{color:var(--muted);margin-right:6px;}
+
+  /* Hero terminal */
+  .hero{display:flex;gap:30px;padding:26px 30px;align-items:flex-start;}
+  .profile{flex-shrink:0;width:520px;}
+  .art{
+    font-size:7.7px;
+    line-height:7.7px;
+    color:#c9d1d9;
+    white-space:pre;
+    font-family: "Courier New", monospace;
+    margin:0;
+    font-weight:600;
+    user-select:none;
+  }
+  .hero-terminal{flex:1;font-size:14.5px;line-height:1.85;}
+  .prompt{color:var(--green);}
+  .cmd{color:var(--text);}
+  .arrow{color:var(--cyan);margin-right:10px;}
+  .key{color:var(--orange);display:inline-block;width:120px;}
+  .val{color:var(--text);}
+  .hero-terminal .row{white-space:pre-wrap;}
+  .rule{color:var(--border);}
+  .cursor{
+    display:inline-block;width:8px;height:15px;background:var(--text);
+    animation:blink 1s step-start infinite;vertical-align:middle;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* Grid below */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;} .hero{flex-direction:column;} .ascii{width:100%;}}
+
+  /* about_me.js */
+  .code{padding:16px 20px;font-size:13.5px;line-height:1.9;overflow-x:auto;}
+  .code table{border-collapse:collapse;width:100%;}
+  .code td.ln{color:#4b5563;text-align:right;padding-right:16px;user-select:none;width:24px;vertical-align:top;}
+  .code td.src{white-space:pre;}
+  .tok-kw{color:var(--purple);}
+  .tok-var{color:#e6b673;}
+  .tok-punc{color:var(--muted);}
+  .tok-prop{color:var(--cyan);}
+  .tok-str{color:#a5d67d;}
+  .tok-fn{color:#d2a8ff;}
+
+  /* tech stack */
+  .tech-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:22px 10px;
+    padding:26px 20px;
+    text-align:center;
+  }
+  .tech-item{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .tech-icon{
+    width:52px;height:52px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;
+  }
+  .tech-label{font-size:12px;color:var(--muted);}
+
+  /* github stats */
+  .stats-body{padding:18px 20px;display:flex;gap:26px;flex-wrap:wrap;}
+  .stats-list{display:flex;flex-direction:column;gap:16px;min-width:170px;}
+  .stat-row{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text);}
+  .stat-icon{color:var(--yellow);width:16px;text-align:center;}
+  .stat-num{margin-left:auto;color:var(--text);font-weight:600;}
+  .heat{flex:1;min-width:280px;}
+  .heat-title{font-size:11.5px;color:var(--muted);text-align:right;margin-bottom:6px;}
+  .heat-grid{display:grid;grid-template-columns:repeat(53,1fr);gap:3px;}
+  .heat-cell{width:9px;height:9px;border-radius:2px;background:#161b22;}
+  .heat-months{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:6px;}
+
+  /* connect */
+  .connect{padding:18px 22px;display:flex;flex-direction:column;gap:16px;font-size:13.5px;}
+  .connect-row{display:flex;align-items:center;gap:12px;}
+  .connect-row .ic{width:18px;text-align:center;color:var(--muted);}
+  .connect-row .lbl{color:var(--text);width:82px;}
+  .connect-row a{color:var(--link);text-decoration:none;}
+  .connect-row a:hover{text-decoration:underline;}
+  .connect-row .plain{color:var(--text);}
+
+  .footer{
+    text-align:center;padding:16px;color:var(--text);font-size:14px;
+  }
+  .footer .prompt{margin-right:8px;}
+  .footer .str{color:#a5d67d;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="card">
+    <div class="titlebar">
+      <div class="dot red"></div><div class="dot amber"></div><div class="dot green"></div>
+    </div>
+    <div class="hero">
+      <div class="profile">
+        <pre class="art">                                   .           
+                                .:..-+=++=-::==-====+*-.:..:+:...
+                              :.::. :-::..::--- .:-::=. -::::::.:..
+                            ..- .   ..      ... .:-=   . :=:.==-=...::
+                          :..      . ..           .=::.-::= :-. ::=-....
+                        ...        :   .          ..:-.::::.-=-:  :.-==-- .
+                      .-           ..  :              ..   .--:..   .-=...-.
+                      ..  .                           .     :.  .   ..-:..-...
+                     -.  .:      .                              :::.:----:=::-:
+                    ..   .:                                       ....  ... .::.
+                    .:.  .:.                       ...:-::.:.       ..:. .-:--::.
+                     .:              ..     .....:-:-++****#*+-::...  ..  ..:. :.
+                      - .          ..:......::--=++***####%%%%#%##**-     .  :-+-
+                        :.:        ...........:::=+==++*#%@%@@%@%@%*+=. .    ..:.
+                        . ..:      :........::-+=+****####%%%%%@%@###+-:..  .-:.
+                            ..     .... .....::--+#%*===*##*##*****+*=... . .
+                             -.   .::::...::===++*##***************##*. . :
+                             ..  .::: .     .....::::=::......::=-=:+*:. ..
+                             .-  :--- ....           ...     .-=++**+##:..::.
+                             ..  .:::....           .=+=.  .  ::-:.:*#*- .=::
+                            .:  .:---:.   :  .:.    -%@*-..:..:+=-+###%+.--:=
+                           ...-:..:::....    ...   .+%@%#=.  .:-+*%@%%*=-**--
+                           .:.+-.:---:....  .....  :*#@%%@#*==*#%@%@%##+ -#=:
+                            .:. ..::-::.::-:--:..  -*%@%#%%@@%%@%@%%%#+---*=.
+                            .-  -.:----..:-=+-.  ..-*#@%#%##%%%@%@%%%%+-+#*=.
+                             :::...----:::::-.  ... .-+*#%#+=*%@%@%@%%-:***:
+                             ..-:..:-::::::::.  .       :=#%*=*@%@#@%#:-###:
+                              :-=:..---:-::..       .. .:=*#%%#%%@%%#*=:--:
+                               .:.  :::::...        :-.:.:--=+##%%%%*+:.
+                                    .-=-:::..       ....::.:: .+#%##++-.
+                                     ...::...       .:::==-::. :#%#+-:.
+                                     . :-:-:.       .=+++*#*%*::+++=:.
+                                     .. ..:......      . .=+%*--+-:...
+                                     :-. .:......      ...++*+*+-: :=:
+                                     .::..    ...  .::.:+**+*+-. .-=+.
+                                     :-::..   .......:. :=+**+: .-#**:.
+                                   : .::::::..            ..  --+****:::
+                                   . ..:::::.:  .           .:++#**#*::::
+                                  :.    .....:....        .-++*+***#+.--=.
+                               .:...      . ..  .       ..-==+***+*+. ::-..
+                            ..:  .                   ..:-==++**##*+: :===----::
+                         .:..    ..  ..                 .--+++++*=:  .::-:..:-::.
+                    .:.:.    ..  ..            .     ..:-=++++++=: .-====----::====--..
+                .:...:..        ...    .:.           ...:--=++=::...:::::...:..:::::.:::.
+           .::..          :       .    :. =.  .:-:......:=+*#+-:.   .-------=..::::--------=..
+        :...             ..        .   .  .....:+==-:::.:-=*-:.     .:..::..... .... :.:.:.:.:.:
+    .:..   ...           .:        ..       -:=**#*****+++-. .      :-----:::-: .-::...:::::..:::.:
+   .  .      ..     ..   .:      ..  .      : :+++*###*+=+: .     .............  ....  .............
+  .           ..         .:                  ...-*###***++:.    ..:.:.....:::..  ..... ..............
+ ..     ...      .  ..:  .:        .          .:.=+**++=::      ...............  . ...  .... .....
+     ..  ..         ..:   :         ..            .:++-    .................... .. ...  .... ..... .
+      ..            . :  .:         ...             :=:  .... ................  ..  ..   .. ...   .
+        :          .  :  ....       ...        .        :..   ..........  . ..  .   ...  . . .  .
+   . .  ..         . .     ..        ..  ....   ... .: ....    .......    . ..  .    ... . . . .
+                  ....      ..  .    .:...  ...     .:- .  .  ...  . .    . ..  .      ... .  .
+      ..          . ..      .   .    .....      .  . ....     . .  . ..   . ..  .      ...
+                  .. .      ..         ....  .      .   .    .     .      .    .         .
+
+</pre>
+      </div>
+      <div class="hero-terminal">
+        <div class="row"><span class="prompt">user@Andrew6rant</span><span class="cmd">:~$ cat README.md</span></div>
+        <div class="row">&nbsp;</div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Name:</span><span class="val">Andrew Grant</span></div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Role:</span><span class="val">Full Stack Developer</span></div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Location:</span><span class="val">Bangladesh, Earth</span></div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Focus:</span><span class="val">Building scalable web apps and</span></div>
+        <div class="row">                <span class="val">solving real world problems</span></div>
+        <div class="row">&nbsp;</div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Code:</span><span class="val">Python | JavaScript | TypeScript | PHP</span></div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Stack:</span><span class="val">React | Next.js | Node.js | Express</span></div>
+        <div class="row">                <span class="val">MongoDB | PostgreSQL | Tailwind CSS</span></div>
+        <div class="row"><span class="arrow">&gt;</span><span class="key">Tools:</span><span class="val">Git | Docker | VS Code | Figma</span></div>
+        <div class="row">&nbsp;</div>
+        <div class="row rule">&gt; --------------------------------------------------</div>
+        <div class="row">&nbsp;</div>
+        <div class="row"><span class="prompt">user@Andrew6rant</span><span class="cmd">:~$ whoami</span></div>
+        <div class="row">Developer. Problem solver. Lifelong learner.</div>
+        <div class="row"><span class="prompt">user@Andrew6rant</span><span class="cmd">:~$ <span class="cursor"></span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID ROW 1 -->
+  <div class="grid">
+    <div class="card">
+      <div class="filebar"><span class="fname"><span class="chev">&gt;</span>about_me.js</span><span>&lt;/&gt;</span></div>
+      <div class="code">
+<table><tbody>
+<tr><td class="ln">1</td><td class="src"><span class="tok-kw">const</span> <span class="tok-var">Andrew</span> <span class="tok-punc">=</span> {</td></tr>
+<tr><td class="ln">2</td><td class="src">  <span class="tok-prop">code</span>: [<span class="tok-str">"JavaScript"</span>, <span class="tok-str">"Python"</span>, <span class="tok-str">"TypeScript"</span>, <span class="tok-str">"PHP"</span>],</td></tr>
+<tr><td class="ln">3</td><td class="src">  <span class="tok-prop">askMeAbout</span>: [<span class="tok-str">"web dev"</span>, <span class="tok-str">"tech"</span>, <span class="tok-str">"finance"</span>, <span class="tok-str">"books"</span>],</td></tr>
+<tr><td class="ln">4</td><td class="src">  <span class="tok-prop">technologies</span>: {</td></tr>
+<tr><td class="ln">5</td><td class="src">    <span class="tok-prop">frontEnd</span>: [<span class="tok-str">"React"</span>, <span class="tok-str">"Next.js"</span>, <span class="tok-str">"Tailwind CSS"</span>],</td></tr>
+<tr><td class="ln">6</td><td class="src">    <span class="tok-prop">backEnd</span>: [<span class="tok-str">"Node.js"</span>, <span class="tok-str">"Express"</span>, <span class="tok-str">"Laravel"</span>],</td></tr>
+<tr><td class="ln">7</td><td class="src">    <span class="tok-prop">databases</span>: [<span class="tok-str">"MongoDB"</span>, <span class="tok-str">"PostgreSQL"</span>],</td></tr>
+<tr><td class="ln">8</td><td class="src">    <span class="tok-prop">devOps</span>: [<span class="tok-str">"Docker"</span>, <span class="tok-str">"GitHub Actions"</span>]</td></tr>
+<tr><td class="ln">9</td><td class="src">  },</td></tr>
+<tr><td class="ln">10</td><td class="src">  <span class="tok-prop">currentFocus</span>: <span class="tok-str">"Building products and leveling up"</span>,</td></tr>
+<tr><td class="ln">11</td><td class="src">  <span class="tok-prop">funFact</span>: <span class="tok-str">"I debug with console.log and 90% confidence"</span></td></tr>
+<tr><td class="ln">12</td><td class="src">};</td></tr>
+<tr><td class="ln">13</td><td class="src">&nbsp;</td></tr>
+<tr><td class="ln">14</td><td class="src"><span class="tok-fn">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">"Let's build something awesome! 🚀"</span>);</td></tr>
+</tbody></table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="filebar"><span class="fname"><span class="chev">&gt;</span>tech_stack.sh</span><span>&gt;_</span></div>
+      <div class="tech-grid" id="tech-grid"></div>
+    </div>
+  </div>
+
+  <!-- GRID ROW 2 -->
+  <div class="grid">
+    <div class="card">
+      <div class="filebar"><span class="fname"><span class="chev">&gt;</span>github_stats.py</span></div>
+      <div class="stats-body">
+        <div class="stats-list">
+          <div class="stat-row"><span class="stat-icon">★</span>Total Stars<span class="stat-num">120+</span></div>
+          <div class="stat-row"><span class="stat-icon">⑂</span>Total Commits<span class="stat-num">1.2k+</span></div>
+          <div class="stat-row"><span class="stat-icon">▤</span>Repositories<span class="stat-num">25+</span></div>
+          <div class="stat-row"><span class="stat-icon">◎</span>Followers<span class="stat-num">200+</span></div>
+        </div>
+        <div class="heat">
+          <div class="heat-title">contributions in the last year</div>
+          <div class="heat-grid" id="heat"></div>
+          <div class="heat-months">
+            <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="filebar"><span class="fname"><span class="chev">&gt;</span>connect.md</span><span>🔗</span></div>
+      <div class="connect">
+        <div class="connect-row"><span class="ic">🌐</span><span class="lbl">Portfolio:</span><a href="#">andrew6rant.dev</a></div>
+        <div class="connect-row"><span class="ic">💼</span><span class="lbl">LinkedIn:</span><a href="#">linkedin.com/in/andrew6rant</a></div>
+        <div class="connect-row"><span class="ic">🐦</span><span class="lbl">Twitter:</span><a href="#">twitter.com/andrew6rant</a></div>
+        <div class="connect-row"><span class="ic">✉️</span><span class="lbl">Email:</span><a href="#">hello@andrew6rant.dev</a></div>
+        <div class="connect-row"><span class="ic">📍</span><span class="lbl">Location:</span><span class="plain">Bangladesh</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span class="prompt">user@Andrew6rant:~$</span><span class="str"> "Code. Learn. Build. Repeat."</span></div>
+
+</div>
+
+<script>
+// Tech stack icons (simple colored badges since we can't load external logo assets)
+const tech = [
+  {name:"JavaScript", bg:"#f7df1e", fg:"#1a1a1a", label:"JS"},
+  {name:"TypeScript", bg:"#3178c6", fg:"#ffffff", label:"TS"},
+  {name:"React", bg:"#0d1117", fg:"#61dafb", label:"⚛"},
+  {name:"Next.js", bg:"#0d1117", fg:"#ffffff", label:"N"},
+  {name:"Node.js", bg:"#0d1117", fg:"#3fb950", label:"⬡"},
+  {name:"PHP", bg:"#0d1117", fg:"#8993be", label:"php"},
+  {name:"Laravel", bg:"#0d1117", fg:"#ff2d20", label:"◆"},
+  {name:"MongoDB", bg:"#0d1117", fg:"#3fb950", label:"🍃"},
+  {name:"PostgreSQL", bg:"#0d1117", fg:"#4d8ac9", label:"🐘"},
+  {name:"Tailwind CSS", bg:"#0d1117", fg:"#38bdf8", label:"~"},
+  {name:"Docker", bg:"#0d1117", fg:"#2496ed", label:"🐳"},
+  {name:"Git", bg:"#0d1117", fg:"#f05032", label:"⑂"},
+  {name:"GitHub", bg:"#0d1117", fg:"#ffffff", label:"◉"},
+  {name:"VS Code", bg:"#0d1117", fg:"#007acc", label:"◧"},
+  {name:"Figma", bg:"#0d1117", fg:"#a259ff", label:"◍"},
+];
+const grid = document.getElementById("tech-grid");
+tech.forEach(t=>{
+  const item = document.createElement("div");
+  item.className = "tech-item";
+  item.innerHTML = `<div class="tech-icon" style="background:${t.bg};color:${t.fg};border:1px solid var(--border);">${t.label}</div><div class="tech-label">${t.name}</div>`;
+  grid.appendChild(item);
+});
+
+// Contribution heatmap (random data for visual effect)
+const heat = document.getElementById("heat");
+const shades = ["#161b22","#0e4429","#006d32","#26a641","#39d353"];
+for(let i=0;i<53*7;i++){
+  const cell = document.createElement("div");
+  cell.className = "heat-cell";
+  const r = Math.random();
+  const shade = r<0.35?0:r<0.55?1:r<0.75?2:r<0.9?3:4;
+  cell.style.background = shades[shade];
+  heat.appendChild(cell);
+}
+</script>
+</body>
+</html>
